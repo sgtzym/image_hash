@@ -1,0 +1,28 @@
+# https://hub.docker.com/r/google/dart
+image: google/dart:2.15-dev
+
+variables:
+  TEST_VARS: "-p vm -j 6 --timeout 30s -r json"
+
+cache:
+  paths:
+    - .pub-cache/global_packages
+
+before_script:
+  - export PATH="$PATH":"~/.pub-cache/bin"
+  - pub get --no-precompile
+  - pub global activate junitreport
+
+build:
+  stage: build
+  script:
+    - dart test $TEST_VARS | tojunit -o report.xml
+    # - dart compile exe bin/cli_app.dart -o bin/img-hash.exe
+  artifacts:
+    when: always
+    # paths:
+    #   - bin/*.exe
+    # expire_in: 1 week
+    reports:
+      junit:
+        - report.xml
