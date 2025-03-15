@@ -1,6 +1,6 @@
 # Image Hash
 
-Perceptual image hashing with Dart 🎯 lang.  
+Perceptual image hashing with Dart 🎯.  
 Library 📚 and CLI 🖥️ for automation and embedding in other Dart/Flutter projects.
 
 > A perceptual hash is a fingerprint of a multimedia file derived from various features from its content.  
